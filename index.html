@@ -1,40 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Love Forever</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+<!doctype html>
+<html lang="en" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <title>Gwendale De Asis</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="/_sdk/element_sdk.js"></script>
   <style>
+    body {
+      box-sizing: border-box;
+    }
+    
     /* --- Base page --- */
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
     body {
       background: #000;
-      height: 100vh;
-      margin: 0;
       overflow: hidden;
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
     }
 
-    /* --- Quick links (translated) --- */
-    .quick-link {
-      position: fixed;
-      right: 10px;
-      width: 35px;
-      height: 35px;
-      z-index: 999;
-      background: #696969;
-      border-radius: 50%;
-      padding: 1px;
-      text-align: center;
-      color: #ddd;
-      text-decoration: none;
-      line-height: 35px;
-      font-size: 13px;
-      user-select: none;
+    .main-wrapper {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
     }
-    .quick-link:nth-of-type(1) { top: 10%; }  /* Create */
-    .quick-link:nth-of-type(2) { top: 4%;  z-index: 998; }  /* More */
-    .quick-link:nth-of-type(3) { top: 16%; z-index: 997; }  /* Source Code */
-    .quick-link:nth-of-type(4) { top: 22%; z-index: 996; }  /* Gift */
+
+    /* --- Profile Picture --- */
+    .profile-container {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 100;
+      text-align: center;
+    }
+
+    .profile-picture {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #e90dd3, #ff6ec7);
+      border: 4px solid #fff;
+      box-shadow: 0 0 30px rgba(233, 13, 211, 0.6), 0 0 60px rgba(233, 13, 211, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 20px;
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    .profile-picture svg {
+      width: 120px;
+      height: 120px;
+      fill: #fff;
+    }
+
+    .profile-name {
+      color: #fff;
+      font-size: 2rem;
+      font-weight: bold;
+      text-shadow: 0 0 20px #e90dd3;
+      margin: 10px 0;
+      letter-spacing: 2px;
+    }
+
+    .profile-tagline {
+      color: #e90dd3;
+      font-size: 1.2rem;
+      text-shadow: 0 0 10px #fff;
+      letter-spacing: 1px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 30px rgba(233, 13, 211, 0.6), 0 0 60px rgba(233, 13, 211, 0.4);
+      }
+      50% {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(233, 13, 211, 0.8), 0 0 80px rgba(233, 13, 211, 0.6);
+      }
+    }
 
     /* --- Love words --- */
     #ui .love {
@@ -42,43 +94,34 @@
       top: 50%;
       left: 50%;
       margin: -225px 0 0 -225px;
-      /* per-item delay via CSS variable --i (1..N) */
       --i: 1;
     }
-    #ui .love:last-child .love_word {
-      color: #fff;
-      font-size: 2rem;
-      text-shadow: 0 0 10px #ea80b0;
-    }
-    /* Make the last item match the others */
-#ui .love:last-child .love_word {
-  color: #ea80b0;
-  font-size: 1.4rem;
-  text-shadow: 0 0 10px #fff;
-}
 
     #ui .love_word {
-      color: #ea80b0;
+      color: #e90dd3;
       font-size: 1.4rem;
       transform: translateY(-100%) rotateZ(-30deg);
       text-shadow: 0 0 10px #fff;
       letter-spacing: 2px;
       white-space: nowrap;
     }
+    
     #ui .love_horizontal {
       animation: horizontal 10000ms infinite alternate ease-in-out;
       animation-delay: calc(var(--i) * -300ms);
     }
+    
     #ui .love_vertical {
       animation: vertical 20000ms infinite linear;
       animation-delay: calc(var(--i) * -300ms);
     }
 
-    /* --- Animations (unchanged) --- */
+    /* --- Animations --- */
     @keyframes horizontal {
       from { transform: translateX(0px); }
       to   { transform: translateX(450px); }
     }
+    
     @keyframes vertical {
       0%   { transform: translateY(180px); }
       10%  { transform: translateY(45px); }
@@ -102,42 +145,153 @@
       79%  { transform: translateY(428.57143px); }
       100% { transform: translateY(180px); }
     }
+
+    /* --- Responsive Design --- */
+    @media (max-width: 768px) {
+      .profile-picture {
+        width: 150px;
+        height: 150px;
+      }
+
+      .profile-picture svg {
+        width: 90px;
+        height: 90px;
+      }
+
+      .profile-name {
+        font-size: 1.5rem;
+      }
+
+      .profile-tagline {
+        font-size: 1rem;
+      }
+
+      #ui .love_word {
+        font-size: 1rem;
+      }
+
+      @keyframes horizontal {
+        from { transform: translateX(0px); }
+        to   { transform: translateX(250px); }
+      }
+    }
+
+    @media (max-width: 480px) {
+      .profile-picture {
+        width: 120px;
+        height: 120px;
+      }
+
+      .profile-picture svg {
+        width: 70px;
+        height: 70px;
+      }
+
+      .profile-name {
+        font-size: 1.2rem;
+      }
+
+      .profile-tagline {
+        font-size: 0.9rem;
+      }
+
+      #ui .love_word {
+        font-size: 0.8rem;
+      }
+
+      @keyframes horizontal {
+        from { transform: translateX(0px); }
+        to   { transform: translateX(150px); }
+      }
+    }
   </style>
-</head>
-<body>
-  <!-- Translated quick links (you can keep or remove the URLs) -->
-  <!-- <a href="https://mp.weixin.qq.com/s/oxLqXBcLCT8ij67DjkW2kw" class="quick-link" title="Create">Create</a>
-  <a href="https://shop1619956412.v.weidian.com/?userid=1619956412&spider_token=2720" class="quick-link" title="More">More</a>
-  <a href="https://pan.quark.cn/s/3344d23e48a8" class="quick-link" title="Source Code">Code</a>
-  <a href="https://shop1619956412.v.weidian.com/?userid=1619956412&spider_token=2720" class="quick-link" title="Gift">Gift</a> -->
-
-  <div id="ui"></div>
-
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div class="main-wrapper h-full"><!-- Profile Section -->
+   <div class="profile-container">
+    <div class="profile-picture">
+     <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+     </svg>
+    </div>
+    <div class="profile-name" id="profileName">
+     Gwendale De Asis
+    </div>
+    <div class="profile-tagline" id="profileTagline">
+     God Bless You!
+    </div>
+   </div><!-- Floating love words -->
+   <div id="ui"></div>
+  </div>
   <script>
-    // Create N floating “I love you” items (was multilingual; now all English)
-    const N = 100;     // adjust if you want fewer/more
-    const ui = document.getElementById('ui');
+    const defaultConfig = {
+      profile_name: "Gwendale De Asis",
+      profile_tagline: "God Bless You!"
+    };
 
+    async function onConfigChange(config) {
+      const nameElement = document.getElementById('profileName');
+      const taglineElement = document.getElementById('profileTagline');
+      
+      if (nameElement) {
+        nameElement.textContent = config.profile_name || defaultConfig.profile_name;
+      }
+      if (taglineElement) {
+        taglineElement.textContent = config.profile_tagline || defaultConfig.profile_tagline;
+      }
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["profile_name", config.profile_name || defaultConfig.profile_name],
+        ["profile_tagline", config.profile_tagline || defaultConfig.profile_tagline]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    // Create N floating "I love you" items
+    const N = 100;
+    const ui = document.getElementById('ui');
+    
     for (let i = 1; i <= N; i++) {
       const love = document.createElement('div');
       love.className = 'love';
       love.style.setProperty('--i', i);
-
-      const h = document.createElement('div');
-      h.className = 'love_horizontal';
-
-      const v = document.createElement('div');
-      v.className = 'love_vertical';
-
+      
+      const horizontal = document.createElement('div');
+      horizontal.className = 'love_horizontal';
+      
+      const vertical = document.createElement('div');
+      vertical.className = 'love_vertical';
+      
       const word = document.createElement('div');
       word.className = 'love_word';
-      word.textContent = 'Happy New Year Gwenieee';
-
-      v.appendChild(word);
-      h.appendChild(v);
-      love.appendChild(h);
+      word.textContent = 'I love you';
+      
+      vertical.appendChild(word);
+      horizontal.appendChild(vertical);
+      love.appendChild(horizontal);
       ui.appendChild(love);
     }
   </script>
-</body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b66c2a6248cbc43',t:'MTc2NzE1MjQ3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
